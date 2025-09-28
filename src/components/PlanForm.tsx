@@ -22,7 +22,10 @@ export const PlanForm = ({ onSubmit, onBack }: PlanFormProps) => {
   };
 
   const handleSubmit = async () => {
-    if (!isFormValid()) return;
+    if (!isFormValid()) {
+      alert("請填寫所有必填欄位（標記 * 的欄位）");
+      return;
+    }
     
     setIsGenerating(true);
     // 模擬 AI 生成時間
@@ -67,8 +70,8 @@ export const PlanForm = ({ onSubmit, onBack }: PlanFormProps) => {
               <ArrowLeft className="h-5 w-5" />
             </Button>
             <div>
-              <h1 className="text-3xl font-bold text-foreground">企畫書資料填寫</h1>
-              <p className="text-muted-foreground">請詳細填寫以下資訊，我們將為您生成專業的企畫書</p>
+              <h1 className="text-3xl font-bold text-foreground">計畫書資料填寫</h1>
+              <p className="text-muted-foreground">請詳細填寫以下資訊，我們將為您生成專業的計畫書</p>
             </div>
           </div>
 
@@ -305,10 +308,10 @@ export const PlanForm = ({ onSubmit, onBack }: PlanFormProps) => {
                 ) : (
                   <Button
                     onClick={handleSubmit}
-                    disabled={!isFormValid() || isGenerating}
+                    disabled={isGenerating}
                     className="bg-business-accent hover:bg-business-accent/90 shadow-button min-w-[120px]"
                   >
-                    {isGenerating ? "生成中..." : "生成企畫書"}
+                    {isGenerating ? "生成中..." : "生成計畫書"}
                   </Button>
                 )}
               </div>

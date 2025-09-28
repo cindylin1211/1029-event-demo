@@ -55,15 +55,15 @@ const Index = () => {
           <div className="mb-12">
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-6 py-2 mb-6">
               <Sparkles className="h-5 w-5 text-white" />
-              <span className="text-white font-medium">AI 智能企畫書生成</span>
+              <span className="text-white font-medium">AI 智能計畫書生成</span>
             </div>
             <h1 className="text-5xl font-bold text-white mb-6 leading-tight">
               企業人力資源提升計畫
               <br />
-              <span className="text-primary-glow">企畫書生成平台</span>
+              <span className="text-primary-glow">計畫書生成平台</span>
             </h1>
             <p className="text-xl text-white/80 mb-8 max-w-3xl mx-auto leading-relaxed">
-              只需填寫基本資訊，AI 即可為您產出專業的大人提申請企畫書，讓您輕鬆獲得政府補助顧問的專業諮詢
+              只需填寫基本資訊，AI 即可為您產出專業的大人提申請計畫書，讓您輕鬆獲得政府補助顧問的專業諮詢
             </p>
           </div>
 
@@ -94,7 +94,7 @@ const Index = () => {
                 <ArrowRight className="h-12 w-12 text-white mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">即時應用</h3>
                 <p className="text-white/70">
-                  生成的企畫書可直接用於政府補助申請和顧問諮詢
+                  生成的計畫書可直接用於政府補助申請和顧問諮詢
                 </p>
               </CardContent>
             </Card>
@@ -107,7 +107,7 @@ const Index = () => {
               onClick={() => setCurrentStep('form')}
               className="bg-white text-business-primary hover:bg-white/90 shadow-button px-8 py-6 text-lg font-semibold"
             >
-              開始生成企畫書
+              開始生成計畫書
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             <p className="text-white/60 text-sm">
