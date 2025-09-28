@@ -10,41 +10,127 @@ interface PlanPreviewProps {
 }
 
 export const PlanPreview = ({ planData, onBack, onReset }: PlanPreviewProps) => {
+  const generateEnhancedContent = () => {
+    // 生成潤飾後的公司簡介
+    const enhancedDescription = planData.businessDescription || 
+      `${planData.companyName}成立至今，始終致力於在${planData.industry || '相關領域'}提供卓越的產品與服務。公司秉持「以人為本、追求卓越」的經營理念，深耕${planData.industry || '產業'}多年，累積豐富的專業經驗與技術能力。面對快速變化的市場環境，本公司積極推動組織轉型與人才培育，期望透過持續的創新與學習，建構更具競爭力的企業體質，為客戶創造更大價值，同時為員工提供更好的發展平台。`;
+
+    // 生成潤飾後的願景
+    const enhancedVision = planData.vision || 
+      `${planData.companyName}以「成為${planData.industry || '業界'}標竿企業」為願景，致力於打造學習型組織。我們深信人才是企業最重要的資產，透過系統性的教育訓練與職能發展，不僅能提升員工的專業技能與工作滿意度，更能強化組織的整體競爭力。本公司將持續投入資源於人力資源發展，建立完善的培訓體系，以培養具備前瞻視野與專業能力的優秀人才，共同朝向企業永續發展的目標邁進。`;
+
+    // 生成潤飾後的訓練內容
+    const enhancedTrainingContent = planData.trainingContent ? 
+      `本訓練計畫針對組織發展需求，規劃多元化的培訓課程內容：
+
+1. 核心職能提升課程
+   ${planData.trainingContent.includes('專業技能') ? '• 專業技術能力強化訓練，包含最新技術趨勢與實務應用' : ''}
+   ${planData.trainingContent.includes('管理') ? '• 管理職能發展課程，培養領導統御與團隊協作能力' : ''}
+   ${planData.trainingContent.includes('溝通') ? '• 溝通表達技巧訓練，提升內外部協調合作效能' : ''}
+
+2. 數位轉型相關訓練
+   • 數位工具應用與資訊系統操作訓練
+   • 數據分析與決策支援能力培養
+   • 創新思維與問題解決技巧訓練
+
+3. 軟實力發展課程
+   • 團隊合作與跨部門協作訓練
+   • 客戶服務品質提升訓練
+   • 持續學習與自我成長能力培養
+
+透過上述課程設計，期望能全面提升員工的綜合職能，建立學習型組織文化，為企業長期發展奠定堅實基礎。` 
+      : `本訓練計畫依據組織發展策略與員工職能需求，規劃系統性的培訓課程，包含專業技能提升、管理能力培養、數位轉型應用等多元化內容，期望透過完整的教育訓練體系，培養具備前瞻視野與專業能力的優秀人才。`;
+
+    return {
+      description: enhancedDescription,
+      vision: enhancedVision,
+      trainingContent: enhancedTrainingContent
+    };
+  };
+
   const generateSWOTAnalysis = () => {
     // 基於用戶輸入的資訊生成 SWOT 分析
     return {
       strengths: [
-        `具備 ${planData.employeeCount} 名員工的規模優勢`,
-        `在 ${planData.industry || '相關產業'} 領域累積豐富經驗`,
-        `擁有明確的企業願景和發展方向`,
-        `積極投入人力資源發展與技能提升`
+        `具備 ${planData.employeeCount} 名員工的組織規模，擁有充足的人力資源基礎`,
+        `在 ${planData.industry || '相關產業'} 領域深耕多年，累積豐富的專業經驗與技術能力`,
+        `管理階層具備明確的企業願景和發展策略，為組織發展提供清晰方向`,
+        `積極重視人力資源發展與員工技能提升，展現良好的學習文化基礎`
       ],
       weaknesses: [
-        `技能需求與現有能力存在落差`,
-        `需要持續投資於員工培訓發展`,
-        `面臨數位轉型的挑戰`,
-        `人才培育體系有待完善`
+        `現有員工技能與未來發展需求間存在能力落差，需要系統性的培訓規劃`,
+        `組織在數位轉型過程中面臨技術更新與流程改善的挑戰`,
+        `人才培育制度有待建立更完整的體系架構與評估機制`,
+        `跨部門協作與知識分享機制需要進一步強化`
       ],
       opportunities: [
-        `政府大人提計畫提供補助機會`,
-        `產業數位化趨勢帶來成長機會`,
-        `員工技能提升將增強競爭力`,
-        `新技術應用可提升營運效率`
+        `政府推動「大專校院學生雙語化學習計畫人力提升計畫」，提供企業培訓補助資源`,
+        `${planData.industry || '產業'}數位化轉型趨勢，為企業創新發展帶來新機遇`,
+        `透過員工技能提升與組織學習，可有效增強企業市場競爭力`,
+        `建立完善的人才培育體系，有助於提升員工留任率與組織向心力`
       ],
       threats: [
-        `產業競爭激烈，需持續創新`,
-        `技術變化快速，需及時跟進`,
-        `人才流動率可能影響培訓成效`,
-        `外部經濟環境變化的影響`
+        `產業競爭日趨激烈，同業間人才爭奪加劇，需持續強化人才留任策略`,
+        `科技發展與市場變化快速，組織需具備敏捷應變與持續學習的能力`,
+        `外部經濟環境不確定性增加，可能影響企業投資培訓的資源配置`,
+        `若未能及時提升員工能力，可能面臨核心競爭力下滑的風險`
       ]
     };
   };
 
+  const enhancedContent = generateEnhancedContent();
+
   const swot = generateSWOTAnalysis();
 
-  const handleDownload = () => {
-    // 這裡可以實現 PDF 下載功能
-    alert("企畫書下載功能將在後續開發完成");
+  const handleDownload = async () => {
+    try {
+      const { jsPDF } = await import('jspdf');
+      const html2canvas = (await import('html2canvas')).default;
+      
+      // 獲取計畫書內容元素
+      const element = document.getElementById('plan-content');
+      if (!element) return;
+      
+      // 創建PDF
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      
+      // 設置中文字體支援
+      pdf.setFont('courier');
+      
+      // 轉換為 canvas
+      const canvas = await html2canvas(element, {
+        scale: 2,
+        useCORS: true,
+        allowTaint: true
+      });
+      
+      const imgData = canvas.toDataURL('image/png');
+      const imgWidth = pageWidth - 20; // 留10mm邊距
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      
+      let heightLeft = imgHeight;
+      let position = 10;
+      
+      // 第一頁
+      pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight - 20;
+      
+      // 如果內容超過一頁，添加更多頁面
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight + 10;
+        pdf.addPage();
+        pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight - 20;
+      }
+      
+      // 下載 PDF
+      pdf.save(`${planData.companyName}_人力資源提升計畫書.pdf`);
+    } catch (error) {
+      console.error('PDF 生成失敗:', error);
+      alert('PDF 生成失敗，請稍後再試');
+    }
   };
 
   return (
@@ -58,7 +144,7 @@ export const PlanPreview = ({ planData, onBack, onReset }: PlanPreviewProps) => 
                 <ArrowLeft className="h-5 w-5" />
               </Button>
               <div>
-                <h1 className="text-3xl font-bold text-foreground">企畫書預覽</h1>
+                <h1 className="text-3xl font-bold text-foreground">計畫書預覽</h1>
                 <p className="text-muted-foreground">AI 已為您生成完整的企業人力資源提升計畫書</p>
               </div>
             </div>
@@ -69,7 +155,7 @@ export const PlanPreview = ({ planData, onBack, onReset }: PlanPreviewProps) => 
               </Button>
               <Button onClick={handleDownload} className="bg-business-accent hover:bg-business-accent/90 shadow-button">
                 <Download className="mr-2 h-4 w-4" />
-                下載企畫書
+                下載計畫書
               </Button>
             </div>
           </div>
@@ -80,17 +166,17 @@ export const PlanPreview = ({ planData, onBack, onReset }: PlanPreviewProps) => 
               <div className="flex items-center gap-4">
                 <CheckCircle className="h-12 w-12 text-business-accent" />
                 <div>
-                  <h3 className="text-xl font-semibold text-foreground">企畫書生成完成！</h3>
+                  <h3 className="text-xl font-semibold text-foreground">計畫書生成完成！</h3>
                   <p className="text-muted-foreground">
-                    AI 已根據您的資訊生成專業的企業人力資源提升計畫書，您可以直接使用此企畫書進行政府補助申請
+                    AI 已根據您的資訊生成專業的企業人力資源提升計畫書，您可以直接使用此計畫書進行政府補助申請
                   </p>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          {/* 企畫書內容 */}
-          <div className="space-y-8">
+          {/* 計畫書內容 */}
+          <div id="plan-content" className="space-y-8">
             {/* 封面資訊 */}
             <Card className="shadow-card">
               <CardHeader className="bg-gradient-primary text-white">
@@ -151,18 +237,14 @@ export const PlanPreview = ({ planData, onBack, onReset }: PlanPreviewProps) => 
                 <div>
                   <h4 className="font-semibold mb-3">2. 公司簡介</h4>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    {planData.businessDescription || 
-                      `${planData.companyName}致力於在${planData.industry || '相關領域'}提供優質的產品與服務。公司秉持專業、創新的經營理念，持續投入人力資源發展，以提升企業競爭力並創造永續價值。`
-                    }
+                    {enhancedContent.description}
                   </p>
                 </div>
 
                 <div>
                   <h4 className="font-semibold mb-3">3. 經營理念與願景</h4>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    {planData.vision || 
-                      `${planData.companyName}以「持續創新、追求卓越」為經營理念，致力於成為${planData.industry || '業界'}的領導品牌。我們重視人才培育，透過持續的教育訓練提升員工專業能力，建構學習型組織，以應對快速變化的市場環境。`
-                    }
+                    {enhancedContent.vision}
                   </p>
                 </div>
               </CardContent>
@@ -265,7 +347,7 @@ export const PlanPreview = ({ planData, onBack, onReset }: PlanPreviewProps) => 
                 <div>
                   <h4 className="font-semibold mb-3">4. 訓練內容規劃</h4>
                   <div className="bg-business-secondary/30 p-4 rounded-lg">
-                    <p className="text-sm leading-relaxed">{planData.trainingContent}</p>
+                    <div className="text-sm leading-relaxed whitespace-pre-line">{enhancedContent.trainingContent}</div>
                   </div>
                 </div>
 
@@ -334,7 +416,7 @@ export const PlanPreview = ({ planData, onBack, onReset }: PlanPreviewProps) => 
               className="bg-business-accent hover:bg-business-accent/90 shadow-button"
             >
               <Download className="mr-2 h-4 w-4" />
-              下載完整企畫書
+              下載完整計畫書
             </Button>
           </div>
         </div>
