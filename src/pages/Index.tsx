@@ -58,12 +58,12 @@ const Index = () => {
               <span className="text-white font-medium">AI 智能計畫書生成</span>
             </div>
             <h1 className="text-5xl font-bold text-white mb-6 leading-tight">
-              企業人力資源提升計畫
+              AWS 企業人力資源提升計畫
               <br />
               <span className="text-primary-glow">計畫書生成平台</span>
             </h1>
             <p className="text-xl text-white/80 mb-8 max-w-3xl mx-auto leading-relaxed">
-              只需填寫基本資訊，AI 即可為您產出專業的大人提申請計畫書，讓您輕鬆獲得政府補助顧問的專業諮詢
+              只需填寫基本資訊，AI 即可為您產出專業的大人提申請計畫書，現場直接找 AWS 政府補助顧問進行專業諮詢
             </p>
           </div>
 
@@ -74,7 +74,7 @@ const Index = () => {
                 <FileText className="h-12 w-12 text-white mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">智能分析</h3>
                 <p className="text-white/70">
-                  根據企業資訊自動分析 SWOT，產出專業的企業經營策略內容
+                  根據企業資訊自動分析 SWOT，產出符合 AWS 申請標準的專業計畫書
                 </p>
               </CardContent>
             </Card>
@@ -84,7 +84,7 @@ const Index = () => {
                 <Sparkles className="h-12 w-12 text-white mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">一鍵生成</h3>
                 <p className="text-white/70">
-                  簡單填寫表單，AI 立即生成完整的企業人力資源提升計畫書
+                  簡單填寫表單，AI 立即生成完整的 AWS 企業人力資源提升計畫書
                 </p>
               </CardContent>
             </Card>
@@ -94,7 +94,7 @@ const Index = () => {
                 <ArrowRight className="h-12 w-12 text-white mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">即時應用</h3>
                 <p className="text-white/70">
-                  生成的計畫書可直接用於政府補助申請和顧問諮詢
+                  生成的計畫書可直接帶至現場，與 AWS 政府補助顧問進行諮詢
                 </p>
               </CardContent>
             </Card>
@@ -111,7 +111,7 @@ const Index = () => {
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             <p className="text-white/60 text-sm">
-              完全免費使用 • 3 分鐘即可完成
+              完全免費使用 • 3 分鐘即可完成 • 現場諮詢必備工具
             </p>
           </div>
         </div>

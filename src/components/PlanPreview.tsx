@@ -90,43 +90,65 @@ export const PlanPreview = ({ planData, onBack, onReset }: PlanPreviewProps) => 
       // 獲取計畫書內容元素
       const element = document.getElementById('plan-content');
       if (!element) return;
+
+      // 創建臨時容器來控制分頁
+      const tempContainer = document.createElement('div');
+      tempContainer.style.position = 'absolute';
+      tempContainer.style.left = '-9999px';
+      tempContainer.style.width = '210mm';
+      tempContainer.style.fontFamily = 'Arial, sans-serif';
+      tempContainer.style.fontSize = '12px';
+      tempContainer.style.lineHeight = '1.6';
+      tempContainer.style.color = '#000';
+      tempContainer.style.backgroundColor = '#fff';
       
-      // 創建PDF
-      const pdf = new jsPDF('p', 'mm', 'a4');
-      const pageWidth = pdf.internal.pageSize.getWidth();
-      const pageHeight = pdf.internal.pageSize.getHeight();
+      // 複製內容並添加分頁處理
+      tempContainer.innerHTML = element.innerHTML;
       
-      // 設置中文字體支援
-      pdf.setFont('courier');
-      
-      // 轉換為 canvas
-      const canvas = await html2canvas(element, {
-        scale: 2,
-        useCORS: true,
-        allowTaint: true
+      // 為每個主要區塊添加分頁控制
+      const sections = tempContainer.querySelectorAll('.section-break');
+      sections.forEach(section => {
+        (section as HTMLElement).style.pageBreakBefore = 'always';
+        (section as HTMLElement).style.marginTop = '20px';
       });
       
-      const imgData = canvas.toDataURL('image/png');
-      const imgWidth = pageWidth - 20; // 留10mm邊距
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      document.body.appendChild(tempContainer);
+
+      const canvas = await html2canvas(tempContainer, {
+        scale: 1.5,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: '#ffffff',
+        width: 794, // A4 width in pixels at 96 DPI
+        height: 1123 // A4 height in pixels at 96 DPI
+      });
+
+      document.body.removeChild(tempContainer);
+
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const pdfWidth = 210;
+      const pdfHeight = 297;
+      const imgWidth = pdfWidth;
+      const imgHeight = (canvas.height * pdfWidth) / canvas.width;
       
       let heightLeft = imgHeight;
-      let position = 10;
-      
+      let position = 0;
+
       // 第一頁
-      pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight - 20;
-      
-      // 如果內容超過一頁，添加更多頁面
+      pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pdfHeight;
+
+      // 後續頁面，確保不在段落中間分頁
       while (heightLeft >= 0) {
-        position = heightLeft - imgHeight + 10;
+        position = heightLeft - imgHeight;
         pdf.addPage();
-        pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight - 20;
+        pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pdfHeight;
       }
+
+      pdf.save(`${planData.companyName}-AWS人力資源提升計畫書.pdf`);
       
-      // 下載 PDF
-      pdf.save(`${planData.companyName}_人力資源提升計畫書.pdf`);
+      alert('AWS 計畫書已成功下載，請現場與 AWS 政府補助顧問諮詢！');
     } catch (error) {
       console.error('PDF 生成失敗:', error);
       alert('PDF 生成失敗，請稍後再試');
@@ -166,9 +188,9 @@ export const PlanPreview = ({ planData, onBack, onReset }: PlanPreviewProps) => 
               <div className="flex items-center gap-4">
                 <CheckCircle className="h-12 w-12 text-business-accent" />
                 <div>
-                  <h3 className="text-xl font-semibold text-foreground">計畫書生成完成！</h3>
+                  <h3 className="text-xl font-semibold text-foreground">AWS 計畫書生成完成！</h3>
                   <p className="text-muted-foreground">
-                    AI 已根據您的資訊生成專業的企業人力資源提升計畫書，您可以直接使用此計畫書進行政府補助申請
+                    您的 AWS 企業人力資源提升計畫書已經準備就緒。請下載後帶至現場，與 AWS 政府補助顧問進行專業諮詢。
                   </p>
                 </div>
               </div>
@@ -183,7 +205,7 @@ export const PlanPreview = ({ planData, onBack, onReset }: PlanPreviewProps) => 
                 <CardTitle className="text-center text-2xl">
                   {planData.companyName}
                   <br />
-                  企業人力資源提升計畫
+                  AWS 企業人力資源提升計畫
                   <br />
                   訓練計畫規劃書
                 </CardTitle>
@@ -213,7 +235,7 @@ export const PlanPreview = ({ planData, onBack, onReset }: PlanPreviewProps) => 
             </Card>
 
             {/* 企業簡介 */}
-            <Card className="shadow-card">
+            <Card className="shadow-card section-break">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-business-primary">
                   <Building className="h-5 w-5" />
@@ -251,7 +273,7 @@ export const PlanPreview = ({ planData, onBack, onReset }: PlanPreviewProps) => 
             </Card>
 
             {/* SWOT 分析 */}
-            <Card className="shadow-card">
+            <Card className="shadow-card section-break">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-business-primary">
                   <TrendingUp className="h-5 w-5" />
@@ -309,7 +331,7 @@ export const PlanPreview = ({ planData, onBack, onReset }: PlanPreviewProps) => 
             </Card>
 
             {/* 訓練需求分析 */}
-            <Card className="shadow-card">
+            <Card className="shadow-card section-break">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-business-primary">
                   <Target className="h-5 w-5" />
