@@ -146,6 +146,15 @@ export const PlanPreview = ({ planData, onBack, onReset }: PlanPreviewProps) => 
         heightLeft -= pdfHeight;
       }
 
+      // 添加 disclaimer 在最後一頁底部
+      const pageCount = (pdf as any).internal.getNumberOfPages();
+      for (let i = 1; i <= pageCount; i++) {
+        pdf.setPage(i);
+        pdf.setFontSize(8);
+        pdf.setTextColor(128, 128, 128);
+        pdf.text('10/29 AWS政府補助說明會諮詢用', 105, 290, { align: 'center' });
+      }
+
       pdf.save(`${planData.companyName}-AWS人力資源提升計畫書.pdf`);
       
       alert('AWS 計畫書已成功下載，請現場與 AWS 政府補助顧問諮詢！');

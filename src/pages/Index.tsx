@@ -74,7 +74,7 @@ const Index = () => {
                 <FileText className="h-12 w-12 text-white mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">智能分析</h3>
                 <p className="text-white/70">
-                  根據企業資訊自動分析 SWOT，產出符合 AWS 申請標準的專業計畫書
+                  根據企業資訊自動分析 SWOT，產出符合申請標準的專業計畫書
                 </p>
               </CardContent>
             </Card>
