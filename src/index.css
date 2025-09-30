@@ -15,42 +15,46 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    /* 專業綠色主題 */
-    --primary: 158 64% 52%;
+    /* 橘色白色深藍主題 */
+    --primary: 220 85% 57%;
     --primary-foreground: 0 0% 98%;
-    --primary-glow: 158 64% 62%;
+    --primary-glow: 220 85% 67%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 0 0% 98%;
+    --secondary-foreground: 220 85% 15%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 32 95% 55%;
+    --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 158 64% 52%;
+    --ring: 220 85% 57%;
 
     /* 企業級設計 tokens */
-    --business-primary: 158 64% 52%;
-    --business-secondary: 152 30% 96%;
-    --business-accent: 197 87% 58%;
-    --business-muted: 152 30% 96%;
+    --business-primary: 220 85% 57%;
+    --business-secondary: 0 0% 98%;
+    --business-accent: 32 95% 55%;
+    --business-muted: 210 40% 96.1%;
+    --business-navy: 220 85% 15%;
 
     /* 漸層效果 */
     --gradient-primary: linear-gradient(135deg, hsl(var(--business-primary)), hsl(var(--primary-glow)));
-    --gradient-hero: linear-gradient(135deg, hsl(158 64% 52%) 0%, hsl(158 64% 62%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(152 30% 97%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(220 85% 57%) 0%, hsl(32 95% 55%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(210 40% 98%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(32 95% 55%) 0%, hsl(32 95% 65%) 100%);
+    --gradient-navy: linear-gradient(135deg, hsl(220 85% 15%) 0%, hsl(220 85% 25%) 100%);
 
     /* 陰影效果 */
     --shadow-card: 0 4px 6px -1px hsl(var(--business-primary) / 0.1), 0 2px 4px -1px hsl(var(--business-primary) / 0.06);
     --shadow-form: 0 10px 25px -5px hsl(var(--business-primary) / 0.1), 0 10px 10px -5px hsl(var(--business-primary) / 0.04);
-    --shadow-button: 0 4px 14px 0 hsl(var(--business-primary) / 0.39);
+    --shadow-button: 0 4px 14px 0 hsl(var(--business-accent) / 0.39);
+    --shadow-orange: 0 4px 14px 0 hsl(var(--business-accent) / 0.3);
 
     /* 動畫 */
     --transition-all: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
