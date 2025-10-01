@@ -237,6 +237,21 @@ ${planData.trainingContent.includes('溝通') || planData.trainingContent.includ
         cardElement.style.marginBottom = '20px';
         cardElement.style.padding = '16px';
         cardElement.style.backgroundColor = '#fff';
+        cardElement.style.pageBreakInside = 'avoid';
+      });
+
+      // 防止標題和段落在分頁時被切斷
+      const headings = clonedElement.querySelectorAll('h1, h2, h3, h4, h5, h6');
+      headings.forEach(heading => {
+        const headingElement = heading as HTMLElement;
+        headingElement.style.pageBreakAfter = 'avoid';
+        headingElement.style.pageBreakInside = 'avoid';
+      });
+
+      const paragraphs = clonedElement.querySelectorAll('p, li, div');
+      paragraphs.forEach(para => {
+        const paraElement = para as HTMLElement;
+        paraElement.style.pageBreakInside = 'avoid';
       });
 
       // 添加分頁標記
@@ -303,7 +318,7 @@ ${planData.trainingContent.includes('溝通') || planData.trainingContent.includ
         heightLeft -= contentHeight;
       }
 
-      // 在每頁底部添加頁碼和 disclaimer
+      // 在每頁底部添加頁碼
       const totalPages = (pdf as any).internal.getNumberOfPages();
       for (let i = 1; i <= totalPages; i++) {
         pdf.setPage(i);
@@ -312,11 +327,6 @@ ${planData.trainingContent.includes('溝通') || planData.trainingContent.includ
         pdf.setFontSize(8);
         pdf.setTextColor(100, 100, 100);
         pdf.text(`${i} / ${totalPages}`, pdfWidth - margin, pdfHeight - 5, { align: 'right' });
-        
-        // 添加 disclaimer
-        pdf.setFontSize(8);
-        pdf.setTextColor(128, 128, 128);
-        pdf.text('10/29 政府補助說明會諮詢用', pdfWidth / 2, pdfHeight - 5, { align: 'center' });
       }
 
       pdf.save(`${planData.companyName}-政府補助人力資源提升計畫書.pdf`);
@@ -374,8 +384,8 @@ ${planData.trainingContent.includes('溝通') || planData.trainingContent.includ
           <div id="plan-content" className="space-y-8">
             {/* 封面資訊 */}
             <Card className="shadow-card">
-              <CardHeader className="bg-gradient-primary text-white">
-                 <CardTitle className="text-center text-2xl">
+              <CardHeader className="bg-[#1e40af] text-white border-b-4 border-white">
+                 <CardTitle className="text-center text-2xl font-bold py-4">
                    {planData.companyName}
                    <br />
                    企業人力資源提升計畫
